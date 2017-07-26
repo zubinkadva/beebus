@@ -1,7 +1,7 @@
 # Bee Business
 
 ### What is tihs?
-Developed as a freelancing project entirely by me (of course using a theme). Used for mantaining locations of bee hives on a map.
+Developed as a freelancing project entirely by me (of course using a theme). Used for mantaining locations of bee hives on a map. It uses Laravel 5.4 framework for PHP using MySQL for backend storage.
 
 ### Map?
 This project uses the Google Maps API library. It generates a map with capabilities to add / edit markers (login required). These markers can be identified as having a gate or not. Different marker icons are used for this purpose for easy distinguishing.
