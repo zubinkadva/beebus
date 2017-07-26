@@ -1,5 +1,4 @@
-# beebus
-## Bee Business. 
+# Bee Business
 
 ### What is tihs?
 Developed as a freelancing project entirely by me (of course using a theme). Used for mantaining locations of bee hives on a map.
