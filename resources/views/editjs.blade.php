@@ -100,6 +100,7 @@
                 this.on("sendingmultiple", function (data, xhr, formData) {
                     formData.append("_token", $('[name=_token]').val());
                     formData.append("location_id", $("#location_id").val());
+                    formData.append("index", $("#index").val());
                     formData.append("edit-name", $("#edit-name").val());
                     formData.append("edit-lat", $("#edit-lat").val());
                     formData.append("edit-lng", $("#edit-lng").val());
@@ -115,10 +116,18 @@
 
                 this.on("complete", function (file) {
                     if (this.getRejectedFiles().length === 0 && this.getUploadingFiles().length === 0 && this.getQueuedFiles().length === 0) {
-                        bootbox.alert("<label class='text text-success'><i class='ace-icon fa fa-check-circle fa-fw green'></i> Location edited successfully. Refreshing...</label>");
-                        setTimeout(function () {
-                            window.location.reload();
-                        }, 2000);
+                        var idx = $("#index").val();
+                        maps[0].markers[idx].setPosition(new google.maps.LatLng($("#edit-lat").val(), $("#edit-lng").val()));
+                        if ($("#edit-gate").is(':checked'))
+                            maps[0].markers[idx].setIcon('/assets/images/markers/gate.png');
+                        else
+                            maps[0].markers[idx].setIcon('/assets/images/markers/hive.png');
+                        new google.maps.event.trigger(maps[0].markers[idx], 'click');
+                        $.gritter.add({
+                            title: 'Location updated successfully',
+                            class_name: 'gritter-success gritter-center gritter-light'
+                        });
+                        maps[0].markers[temp].setMap(null);
                     }
                 });
             }

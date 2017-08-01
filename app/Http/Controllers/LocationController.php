@@ -12,7 +12,7 @@ use PDF;
 class LocationController extends Controller
 {
 
-    public function index()
+    public static function index()
     {
         Mapper::map(0, 0, ['marker' => false, 'center' => false, 'eventAfterLoad' => 'ops(maps[0].map)',
             'cluster' => false]);
@@ -67,7 +67,7 @@ class LocationController extends Controller
         $model = new LocationModel();
         $details = $model->getLocationById($request->id);
         $image_details = $model->getImagesByLocationId($request->id);
-        return view('show', ['location' => $details, 'images' => $image_details]);
+        return view('show', ['location' => $details, 'images' => $image_details, 'index' => $request->index]);
     }
 
     public function printIt($id)

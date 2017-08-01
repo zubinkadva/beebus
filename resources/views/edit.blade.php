@@ -7,6 +7,7 @@
       enctype="multipart/form-data" action="{{url('editLocation')}}">
     {{csrf_field()}}
     <input type="hidden" id="location_id" name="location_id" value="{{encrypt($location->id)}}">
+    <input type="hidden" id="index" name="index" value="{{$index}}">
 
     <div class="form-group">
         <div class="col-xs-12">
@@ -31,13 +32,13 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-xs-6">
+                    <div class="col-xs-12">
                         <input type="text" id="edit-lat" name="edit-lat" placeholder="Latitude"
                                class="width-100" value="{{$location->lat}}">
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-xs-6">
+                    <div class="col-xs-12">
                         <input type="text" id="edit-lng" name="edit-lng" placeholder="Longitude"
                                class="width-100" value="{{$location->lng}}">
                     </div>

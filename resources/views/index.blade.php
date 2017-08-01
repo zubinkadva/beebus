@@ -3,6 +3,7 @@
 @section('styles')
     <link href="{{asset('assets/css/dropzone.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('assets/css/colorbox.min.css')}}"/>
+    <link rel="stylesheet" href="{{asset('assets/css/jquery.gritter.min.css')}}"/>
 @endsection
 
 @section('body')
@@ -81,6 +82,7 @@
     <script src="{{ asset('assets/js/dropzone.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootbox.js') }}"></script>
     <script src="{{ asset('assets/js/jquery.colorbox.min.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery.gritter.min.js') }}"></script>
 @endsection
 
 @section('inline-scripts')
@@ -117,7 +119,7 @@
                 }, 500);
             });
 
-            $('.btn-sign-out').click(function () {
+            /*$('.btn-sign-out').click(function () {
                 $.ajax({
                     url: "{{url('auth/logout')}}",
                     method: 'post',
@@ -137,7 +139,7 @@
                         bootbox.alert('Some unexpected error has occurred');
                     }
                 });
-            });
+            });*/
 
             $('.btn-change-password').click(function () {
                 $.ajax({
@@ -157,15 +159,31 @@
 
         });
 
+        var temp = -1;
+
         function ops(map) {
             google.maps.event.addListener(map, 'click', function (event) {
                 var lat = (event.latLng).lat(), lng = (event.latLng).lng();
+
+                if (temp in maps[0].markers)
+                    maps[0].markers[temp].setMap(null);
+
                 if (!$('#right-menu').hasClass('aside-hidden')) {
+                    maps[0].markers.push(new google.maps.Marker({
+                        position: event.latLng,
+                        map: map
+                    }));
+                    temp = maps[0].markers.length - 1;
                     $('#lat').val(lat);
                     $('#lng').val(lng);
                 }
 
                 if ($('#show-edit-form').is(':visible')) {
+                    maps[0].markers.push(new google.maps.Marker({
+                        position: event.latLng,
+                        map: map
+                    }));
+                    temp = maps[0].markers.length - 1;
                     $('#edit-lat').val(lat);
                     $('#edit-lng').val(lng);
                 }
@@ -195,7 +213,8 @@
                 method: 'post',
                 data: {
                     "_token": "{{csrf_token()}}",
-                    "id": id
+                    "id": id,
+                    "index": index
                 },
                 success: function (data) {
                     $(".location-details").html(data);

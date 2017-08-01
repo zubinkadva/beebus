@@ -30,6 +30,7 @@
 
         $('.btn-edit').click(function (e) {
             var _id = $('#_id').val();
+            var _index = $('#_index').val();
             $(".location-details").html('<i class="ace-icon fa fa-spinner fa-spin orange bigger-300">');
             var url = "{{url('auth')}}";
             $.ajax({
@@ -37,7 +38,8 @@
                 method: 'post',
                 data: {
                     "_token": "{{csrf_token()}}",
-                    "_id": _id
+                    "_id": _id,
+                    "_index": _index
                 },
                 success: function (data) {
                     $(".location-details").html(data);

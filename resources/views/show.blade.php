@@ -12,6 +12,7 @@
 
 <div class="details">
     <input type="hidden" id="_id" name="_id" value="{{encrypt($location->id)}}">
+    <input type="hidden" id="_index" name="_index" value="{{$index}}">
     <table class="table table-striped">
         <tr>
             <td><b>Location</b></td>

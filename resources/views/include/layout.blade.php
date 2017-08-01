@@ -67,7 +67,7 @@
         </li>
         <li class="divider"></li>
         <li>
-            <a href="#" class="btn-sign-out">Sign out</a>
+            <a href="{{url('sLogout')}}" class="btn-sign-out">Sign out</a>
         </li>
     </ul>
 </div>

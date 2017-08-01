@@ -6,6 +6,7 @@ use App\AuthModel;
 use App\LocationModel;
 use Auth;
 use Illuminate\Http\Request;
+use Session;
 
 class AuthController extends Controller
 {
@@ -19,7 +20,7 @@ class AuthController extends Controller
             $model = new LocationModel();
             $details = $model->getLocationById($request->_id);
             $image_details = $model->getImagesByLocationId($request->_id);
-            return view('edit', ['location' => $details, 'images' => $image_details]);
+            return view('edit', ['location' => $details, 'images' => $image_details, 'index' => $request->_index]);
         }
     }
 
@@ -32,7 +33,7 @@ class AuthController extends Controller
             $model = new LocationModel();
             $details = $model->getLocationById($request->_id);
             $image_details = $model->getImagesByLocationId($request->_id);
-            return view('edit', ['location' => $details, 'images' => $image_details]);
+            return view('edit', ['location' => $details, 'images' => $image_details, 'index' => $request->_index]);
         }
     }
 
@@ -59,6 +60,28 @@ class AuthController extends Controller
         $model = new AuthModel();
         $model->setPasswordById($request->_pwd);
         return view('auth.change.changed', ['success' => 'Password changed successfully']);
+    }
+
+    public function sLogin()
+    {
+        return view('auth.start.login');
+    }
+
+    public function sVerify(Request $request)
+    {
+        $_username = $request->_username;
+        $_password = $request->_password;
+        if (Auth::attempt(['username' => $_username, 'password' => $_password], true))
+            return redirect()->intended('/');
+        else
+            return back()->withErrors(['error' => 'Bad username/password']);
+    }
+
+    public function sLogout()
+    {
+        Session::flush();
+        Auth::logout();
+        return redirect('sLogin')->withErrors(['success'=>'Logged out']);
     }
 
 }
