@@ -219,6 +219,8 @@
                 success: function (data) {
                     $(".location-details").html(data);
                     highlight(index);
+                    if (temp != -1)
+                        maps[0].markers[temp].setMap(null);
                 },
                 error: function (data) {
                     bootbox.alert("Some unexpected error has occurred");

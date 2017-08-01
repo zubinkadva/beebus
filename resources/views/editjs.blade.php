@@ -171,6 +171,8 @@
                 },
                 success: function (data) {
                     $('.location-details').html(data);
+                    if (temp != -1)
+                        maps[0].markers[temp].setMap(null);
                 },
                 error: function () {
                     bootbox.alert("Some unexpected error has occurred");
