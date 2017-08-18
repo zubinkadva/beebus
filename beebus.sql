@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.4.1deb2ubuntu2
--- http://www.phpmyadmin.net
+-- version 4.6.6
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jul 25, 2017 at 06:05 PM
--- Server version: 5.7.19
--- PHP Version: 5.6.31-1~ubuntu16.04.1+deb.sury.org+1
+-- Host: localhost:3306
+-- Generation Time: Aug 18, 2017 at 07:11 PM
+-- Server version: 10.1.20-MariaDB
+-- PHP Version: 7.0.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -153,6 +153,7 @@ INSERT INTO `locations` (`id`, `name`, `lat`, `lng`, `gate`, `combination`, `pal
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
+  `username` text NOT NULL,
   `password` text NOT NULL,
   `remember_token` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -161,8 +162,8 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `password`, `remember_token`) VALUES
-(1, '$2y$10$fQExXr8N2LCVaQuQgYiN2ev.2jrWxoTQil6QVjC6W0jOAsbzqoKhe', 'NKnI54CzNhaNaMiRbri3wDgi5Mg7Vu2lsGWFfdE8kCqGMeXVUxNKsoEhLf7y');
+INSERT INTO `users` (`id`, `username`, `password`, `remember_token`) VALUES
+(1, 'beebiz', '$2y$10$yZrk3syXPdYMFX7hV4Htq.vKSDurMgmf0bUEQD1C05P0AobL8vOcu', 'M34xP5xTjQFYgc2Ax9hdc6oFbr6rdloFDKhPvA3SEr3AzlXJiwLhJ3E44isk');
 
 --
 -- Indexes for dumped tables
